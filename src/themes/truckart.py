@@ -273,10 +273,8 @@ def ribbon(x, y, w, h, pal, fill=None):
 # --- composition ------------------------------------------------------------
 
 ABOUT = [
-    "I BUILD AGENT SYSTEMS, THEN I BUILD",
-    "THE THING THAT GRADES THEM. A BENCHMARK",
-    "THAT ONLY REPORTS ITS WINS IS NOT",
-    "MEASURING ANYTHING.",
+    "I BUILD RAG AND AGENT SYSTEMS.",
+    "(sometimes websites)"
 ]
 
 LABELS = [
