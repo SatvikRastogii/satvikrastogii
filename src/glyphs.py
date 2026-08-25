@@ -1092,3 +1092,65 @@ def run(s, x, y, cw, ch, extra=""):
     return '<g transform="translate(%s %s) scale(%s %s)"%s>%s</g>' % (
         _n(x), _n(y), _n(cw), _n(ch), extra, "".join(uses)
     )
+
+
+# --- contribution-square renderer (variant 3) ------------------------------
+# Same glyph tables, drawn as rounded squares on a pitch grid. Text blocks use
+# <use> for the same reason the terminal does: a full page of per-cell rects
+# would be about a megabyte.
+
+from glyphs7 import F7, W7, H7, CAPR7  # noqa: E402
+
+BODY = {"t": F5, "w": W, "h": H, "cap": CAPR, "gap": 1, "id": "b"}
+HEAD = {"t": F7, "w": W7, "h": H7, "cap": CAPR7, "gap": 1, "id": "h"}
+
+
+def face_rows(face, ch):
+    return face["t"].get(ch, face["t"].get("?", face["t"][" "]))
+
+
+def face_adv(face):
+    return face["w"] + face["gap"]
+
+
+def face_width(s, face, pitch):
+    if not s:
+        return 0.0
+    return (len(s) * face_adv(face) - face["gap"]) * pitch
+
+
+def sq_gid(face, ch):
+    return "%s%x" % (face["id"], ord(ch))
+
+
+def sq_defs(chars, face, size, rx):
+    """One <g> of unit-pitch rects per glyph, referenced by <use>."""
+    out = []
+    for ch in sorted(set(chars)):
+        rows = face_rows(face, ch)
+        cells = []
+        for r, row in enumerate(rows):
+            for c, px in enumerate(row):
+                if px == "#":
+                    cells.append(
+                        '<rect x="%s" y="%s" width="%s" height="%s" rx="%s"/>'
+                        % (c, r, _n(size), _n(size), _n(rx))
+                    )
+        if cells:
+            out.append('<g id="%s">%s</g>' % (sq_gid(face, ch), "".join(cells)))
+    return "".join(out)
+
+
+def sq_run(s, x, y, pitch, face, extra=""):
+    uses = []
+    adv = face_adv(face)
+    for i, c in enumerate(s):
+        if c == " ":
+            continue
+        if c not in face["t"]:
+            c = "?"
+        uses.append('<use href="#%s" x="%d"/>' % (sq_gid(face, c), i * adv))
+    if not uses:
+        return ""
+    return '<g transform="translate(%s %s) scale(%s)"%s>%s</g>' % (
+        _n(x), _n(y), _n(pitch), extra, "".join(uses))
