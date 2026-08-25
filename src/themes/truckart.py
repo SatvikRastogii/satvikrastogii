@@ -513,7 +513,10 @@ def render(stats, dark=True):
                      'fill="none" stroke="%s" stroke-width="%s" opacity="0.3" '
                      'style="mix-blend-mode:multiply" stroke-linecap="round" '
                      'stroke-linejoin="round"/>'
-                     % (gid, n(bx - 2.5), n(ny + dy - 3), n(s),
+                     # pf._s, not n: the ghost has to be the same scale as the
+                     # letters it shadows or the misprint stops being a
+                     # misprint and becomes a different size of letter
+                     % (gid, n(bx - 2.5), n(ny + dy - 3), pf._s(s),
                         pal["pink"], n(36 / s)))
 
     sy = ny + 336

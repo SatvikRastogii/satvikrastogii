@@ -157,6 +157,14 @@ def _n(v):
     return ("%.1f" % v).rstrip("0").rstrip(".") or "0"
 
 
+def _s(v):
+    """Scale factors need real precision. _n rounds to one decimal, which
+    turned the ribbon's 0.3438 into 0.3 -- type 13% small, and mis-centred,
+    because centre_x had positioned it using the unrounded value. One decimal
+    is fine for coordinates and fatal for a multiplier."""
+    return ("%.5f" % v).rstrip("0").rstrip(".") or "0"
+
+
 def painted(gid, x, y, scale, fill, outline, shadow, highlight=None,
             weight=36.0, out_w=44.0, shadow_dx=8.0, shadow_dy=9.0):
     """Stroke one skeleton into a painted letter.
@@ -169,7 +177,7 @@ def painted(gid, x, y, scale, fill, outline, shadow, highlight=None,
     def use(dx, dy, colour, w, extra=""):
         return ('<use href="#%s" transform="translate(%s %s) scale(%s)" '
                 'stroke="%s" stroke-width="%s"%s/>'
-                % (gid, _n(x + dx), _n(y + dy), _n(scale), colour,
+                % (gid, _n(x + dx), _n(y + dy), _s(scale), colour,
                    _n(w / scale), extra))
 
     layers = [
