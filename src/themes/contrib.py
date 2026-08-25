@@ -193,6 +193,13 @@ def render(stats, dark=True):
                             P_PITCH, P_SQ, P_RX, sweep))
     p.y = py + ph * P_PITCH + 44
 
+    # --- name -------------------------------------------------------------
+    p.head("SATVIK RASTOGI", pitch=N_PITCH)
+    p.body("ai / agentic engineer")
+    p.body("b.tech cs, mait delhi.", lvl=pal["muted"])
+    p.body("graduating 2027. delhi, india.", lvl=pal["muted"])
+    p.gap(0.4)
+
     # --- the live numbers, set in the same squares as the face ------------
     rows = [
         ("commits", _fmt(stats.get("commits_year"))),
@@ -214,13 +221,6 @@ def render(stats, dark=True):
         p.out.append(g.sq_run(value, cx, cy + 42, S_PITCH, g.HEAD,
                               ' fill="%s"' % sc[4]))
     p.y += 2 * rowh + 18
-
-    # --- name -------------------------------------------------------------
-    p.head("SATVIK RASTOGI", pitch=N_PITCH)
-    p.body("ai / agentic engineer")
-    p.body("b.tech cs, mait delhi.", lvl=pal["muted"])
-    p.body("graduating 2027. delhi, india.", lvl=pal["muted"])
-    p.gap(0.4)
 
     # --- the real calendar, used as a rule --------------------------------
     cal = stats.get("calendar") or []
