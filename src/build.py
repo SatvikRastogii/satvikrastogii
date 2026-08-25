@@ -66,7 +66,7 @@ META = {
         "blurb": "An Indian truck rear panel, with each project as a "
                  "matchbox label",
         "alt": "Satvik Rastogi's profile painted as an Indian truck rear "
-               "panel: a HORN OK PLEASE style ribbon reading PUSH OK PLEASE, "
+               "panel: a HORN OK PLEASE style ribbon reading STAR OK PLEASE, "
                "his name in hand-painted display lettering, an ALL INDIA WORK "
                "PERMIT badge reading OPEN TO WORK, and matchbox-label cards "
                "for LexGraph, QueryForge and his wireless sensor network "

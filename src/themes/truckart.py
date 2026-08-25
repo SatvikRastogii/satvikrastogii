@@ -482,12 +482,17 @@ def render(stats, dark=True):
                         n((px1 - px0) * 0.60), n(panel_h * 0.56)))
 
     ry = panel_top + 34
-    gid, gw = p.word("PUSH OK PLEASE", 28)
-    rs = 0.38
+    # Narrow letters -- L, E, I, T -- have side bearings smaller than the
+    # outline's half-width, so at the panel weight the black welds shut and
+    # PLEASE reads as one blob. Lighter stroke and wider tracking, checked
+    # against four alternatives before picking these numbers.
+    gid, gw = p.word("STAR OK PLEASE", 38)
+    rs = min(0.42, 568.0 / gw)
     rw = gw * rs
-    p.out.append(ribbon(cx - rw / 2 - 22, ry, rw + 44, 64, pal))
+    p.out.append(ribbon(cx - rw / 2 - 28, ry, rw + 56, 64, pal))
     p.out.append(pf.painted(gid, cx - rw / 2, ry + 9, rs, pal["turmeric"], ink,
-                            pal["ink"], out_w=42, weight=30, shadow_dx=5, shadow_dy=6))
+                            pal["ink"], out_w=36, weight=26, shadow_dx=5,
+                            shadow_dy=6))
 
     ny = ry + 104
     fan_x, fan_y = px0 + 80, ny + 300
