@@ -124,11 +124,30 @@ def check_readme():
         if 'media="(prefers-color-scheme: dark)"' not in b:
             fail("README.md", "<picture> has no dark <source>")
 
+    seen = set()
     for m in re.finditer(r'src(?:set)?="([^"]*raw\.githubusercontent[^"]*)"',
                          text):
-        if "?v=" not in m.group(1):
+        url = m.group(1)
+        if "?v=" not in url:
             fail("README.md", "asset URL with no ?v= cache-buster: %s"
-                 % m.group(1)[-70:])
+                 % url[-70:])
+        else:
+            seen.add(url.split("?v=")[1])
+
+    # The cache-buster is a hash of the SVG bytes. If it does not match what
+    # is on disk, the README is pointing Camo at a version that no longer
+    # exists and the profile will serve a stale image.
+    if seen:
+        sys.path.insert(0, HERE)
+        import build
+        want = build.asset_version()
+        stale = sorted(v for v in seen if v != want)
+        if stale:
+            fail("README.md", "cache-buster %s does not match the built "
+                              "assets (%s) -- run: python src/build.py "
+                              "--readme" % (", ".join(stale), want))
+        else:
+            ok("cache-buster %s matches the built assets" % want)
 
     if "{{" in text:
         fail("README.md", "unsubstituted template placeholder left in output")

@@ -5,6 +5,7 @@ No SVG library on purpose -- the markup is a string so nothing can quietly
 insert something Camo will refuse to serve.
 """
 import datetime
+import hashlib
 import json
 import os
 import re
@@ -149,17 +150,31 @@ def render_readme(stats, sha):
     print("README.md          active=%s  v=%s" % (active, sha))
 
 
-def short_sha():
-    sha = os.environ.get("GITHUB_SHA", "")
-    if sha:
-        return sha[:7]
-    try:
-        import subprocess
-        return subprocess.check_output(
-            ["git", "rev-parse", "--short=7", "HEAD"], cwd=ROOT
-        ).decode().strip()
-    except Exception:
-        return "dev"
+def asset_version():
+    """Cache-buster: a hash of the SVG bytes, not the commit SHA.
+
+    The brief called for the short SHA. It cannot work, for two reasons this
+    repo hit immediately:
+
+      1. The value has to be written *into* the commit, so it can never equal
+         that commit's own SHA. CI regenerates the README, gets a different
+         value, and the "committed output is stale" check fails every time.
+      2. It changes on every run whether or not the images did, so README.md
+         is always dirty and the skip-the-commit-when-nothing-changed step
+         never fires. You would get a commit a day forever.
+
+    Hashing the assets serves the actual purpose -- telling Camo the bytes
+    changed -- and changes exactly when they do.
+    """
+    h = hashlib.sha1()
+    for variant in ORDER:
+        for theme in ("dark", "light"):
+            p = os.path.join(ROOT, "assets", variant,
+                             "%s-%s.svg" % (variant, theme))
+            if os.path.exists(p):
+                with open(p, "rb") as f:
+                    h.update(f.read())
+    return h.hexdigest()[:8]
 
 
 def save_stats(stats):
@@ -172,15 +187,14 @@ def save_stats(stats):
 
 def reseed(stats):
     """New shimmer seed so variant 3 twinkles differently day to day."""
-    today = datetime.date.today()
-    stats["shimmer_seed"] = int(today.strftime("%Y%m%d"))
+    stats["shimmer_seed"] = int(datetime.date.today().strftime("%Y%m%d"))
     save_stats(stats)
     print("shimmer_seed       %s" % stats["shimmer_seed"])
     return stats
 
 
 def rotate(stats):
-    """Advance the active variant. Written into stats.json so the daily stats
+    """Advance the active variant. Stored in stats.json so the daily stats
     job reads it back rather than resetting it."""
     cur = stats.get("active_variant") or ORDER[0]
     nxt = ORDER[(ORDER.index(cur) + 1) % len(ORDER)] if cur in ORDER else ORDER[0]
@@ -198,12 +212,12 @@ def main(argv):
     if "--rotate" in argv:
         stats = rotate(stats)
         argv = [a for a in argv if a != "--rotate"]
-    if "--readme" in argv:
-        render_readme(stats, short_sha())
-        argv = [a for a in argv if a != "--readme"]
-        if not argv:
-            return
-    want = argv or list(VARIANTS)
+    readme = "--readme" in argv
+    argv = [a for a in argv if a != "--readme"]
+
+    # Build before rendering the README: the cache-buster hashes the SVGs, so
+    # it has to be computed after they are written.
+    want = argv or (list(VARIANTS) if not readme else [])
     for name in want:
         mod, folder = VARIANTS[name]
         outdir = os.path.join(ROOT, "assets", folder)
@@ -211,10 +225,14 @@ def main(argv):
         for dark in (True, False):
             svg = mod.render(stats, dark)
             fn = "%s-%s.svg" % (name, "dark" if dark else "light")
-            with open(os.path.join(outdir, fn), "w", encoding="utf-8") as f:
+            with open(os.path.join(outdir, fn), "w", encoding="utf-8",
+                      newline="\n") as f:
                 f.write(svg)
             print("%-34s %6.1f KB" % (
                 "assets/%s/%s" % (folder, fn), len(svg.encode()) / 1024.0))
+
+    if readme:
+        render_readme(stats, asset_version())
 
 
 if __name__ == "__main__":
