@@ -102,10 +102,8 @@ BOOT = [
 ]
 
 ABOUT = [
-    "i build agent systems, then i build",
-    "the thing that grades them. a",
-    "benchmark that only reports its wins",
-    "is not measuring anything.",
+    "i build rag and agent systems",
+    "(sometimes websites)",
 ]
 
 PROJECTS = [
