@@ -15,7 +15,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 ROOT = os.path.dirname(HERE)
 sys.path.insert(0, HERE)
 
-from themes import terminal, truckart, contrib  # noqa: E402
+from themes import terminal, truckart, contrib, avatar  # noqa: E402
 
 VARIANTS = {
     "terminal": (terminal, "terminal"),
@@ -213,7 +213,7 @@ def main(argv):
         stats = rotate(stats)
         argv = [a for a in argv if a != "--rotate"]
     readme = "--readme" in argv
-    argv = [a for a in argv if a != "--readme"]
+    argv = [a for a in argv if a not in ("--readme", "--avatar")]
 
     # Build before rendering the README: the cache-buster hashes the SVGs, so
     # it has to be computed after they are written.
@@ -230,6 +230,18 @@ def main(argv):
                 f.write(svg)
             print("%-34s %6.1f KB" % (
                 "assets/%s/%s" % (folder, fn), len(svg.encode()) / 1024.0))
+
+    if "--avatar" in sys.argv:
+        # One file, not a light/dark pair: a GitHub avatar is a single image
+        # shown on both backgrounds, so it carries its own ground.
+        outdir = os.path.join(ROOT, "assets", "avatar")
+        os.makedirs(outdir, exist_ok=True)
+        svg = avatar.render()
+        with open(os.path.join(outdir, "avatar.svg"), "w", encoding="utf-8",
+                  newline="\n") as f:
+            f.write(svg)
+        print("%-34s %6.1f KB" % ("assets/avatar/avatar.svg",
+                                  len(svg.encode()) / 1024.0))
 
     if readme:
         render_readme(stats, asset_version())

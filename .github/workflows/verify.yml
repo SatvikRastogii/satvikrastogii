@@ -30,6 +30,7 @@ jobs:
       - name: Rebuild and confirm the committed SVGs match their source
         run: |
           python src/build.py
+          python src/build.py --avatar
           python src/build.py --readme
           if ! git diff --quiet -- assets README.md; then
             echo 'Committed output is stale. Run: python src/build.py && python src/build.py --readme'
