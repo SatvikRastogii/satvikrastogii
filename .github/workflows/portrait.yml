@@ -1,0 +1,50 @@
+name: portrait
+
+# Offset from stats.yml by several hours so the two never race for the branch.
+on:
+  schedule:
+    - cron: '41 11 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-write
+  cancel-in-progress: false
+
+jobs:
+  portrait:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install requests
+
+      - name: Refresh the contribution calendar
+        env:
+          GH_PAT: ${{ secrets.GH_PAT }}
+        run: python src/fetch_stats.py --login satvikrastogii
+
+      - name: New shimmer seed, rebuild variant 3
+        # The ambient twinkle is seeded from the date, so the portrait is
+        # never quite the same two days running.
+        run: python src/build.py --reseed contrib
+
+      - run: python src/verify.py --offline
+
+      - name: Commit if anything actually changed
+        run: |
+          git config user.name  'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/stats.json assets/contrib
+          if git diff --cached --quiet; then
+            echo 'nothing changed; not committing'
+            exit 0
+          fi
+          git commit -m "portrait: reseed shimmer and refresh calendar"
+          git push

@@ -1,0 +1,48 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>review sheet</title>
+<style>
+  html,body{margin:0;font:11px ui-monospace,monospace}
+  #bar{padding:6px 10px;letter-spacing:.06em;text-transform:uppercase}
+  #strip{display:flex;gap:6px;padding:0 6px 6px}
+  .col{overflow:hidden;position:relative;flex:0 0 auto}
+  .col img{position:absolute;left:0;display:block}
+</style>
+<div id="bar"></div>
+<div id="strip"></div>
+<script>
+// The variants are ~4000px tall. Slicing one image across N columns is the
+// only way to see a whole poster, at a readable size, in one screenshot.
+const q = new URLSearchParams(location.search);
+const variant = q.get('v') || 'truckart';
+const theme   = q.get('t') || 'light';
+const target  = +(q.get('w') || 830);      // the README column width being simulated
+const cols    = +(q.get('cols') || 4);
+const shown   = +(q.get('shown') || 366);  // on-screen width of each slice
+const dark    = theme === 'dark';
+document.body.style.background = dark ? '#0d1117' : '#ffffff';
+document.getElementById('bar').style.color = dark ? '#8b949e' : '#59636e';
+document.getElementById('bar').textContent =
+  `${variant} · ${theme} · rendered at ${target}px README width · sliced into ${cols} columns`;
+
+const img = new Image();
+img.onload = () => {
+  const scale = shown / target;                 // shrink only for the sheet
+  const full  = img.naturalHeight * (target / img.naturalWidth) * scale;
+  const seg   = Math.ceil(full / cols);
+  const strip = document.getElementById('strip');
+  for (let i = 0; i < cols; i++) {
+    const d = document.createElement('div');
+    d.className = 'col';
+    d.style.width = shown + 'px';
+    d.style.height = seg + 'px';
+    d.style.outline = '1px solid ' + (dark ? '#30363d' : '#d1d9e0');
+    const im = document.createElement('img');
+    im.src = img.src; im.alt = variant + ' ' + theme;
+    im.style.width = shown + 'px';
+    im.style.top = (-i * seg) + 'px';
+    d.appendChild(im); strip.appendChild(d);
+  }
+};
+img.src = `/assets/${variant}/${variant}-${theme}.svg?c=${Date.now()}`;
+</script>

@@ -1,0 +1,41 @@
+name: verify
+
+# The guard that catches the failures you cannot see until they are live on
+# the profile: a webfont, an off-repo reference, a missing alt, a dead link.
+on:
+  push:
+  schedule:
+    - cron: '9 7 * * 3'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - run: pip install requests
+
+      - name: Font renders (pangram + descender checks)
+        working-directory: src
+        run: python test_glyphs.py
+
+      - name: Rebuild and confirm the committed SVGs match their source
+        run: |
+          python src/build.py
+          python src/build.py --readme
+          if ! git diff --quiet -- assets README.md; then
+            echo 'Committed output is stale. Run: python src/build.py && python src/build.py --readme'
+            git --no-pager diff --stat -- assets README.md
+            exit 1
+          fi
+
+      - name: Constraint linter, including link checks
+        run: python src/verify.py

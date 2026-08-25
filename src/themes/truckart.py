@@ -367,6 +367,7 @@ class Panel(object):
 
     def small(self, s, x, y, colour, cw=CW, ch=CH, anchor="start",
               opacity=None):
+        # glyph box is g.H rows, not the 7-row cap; leading has to clear it
         if not s.strip():
             return ""
         self.chars |= set(s)
@@ -539,16 +540,16 @@ def render(stats, dark=True):
     y += 100
 
     # ---------------- about -----------------------------------------------
-    ah = 190
+    ah = 236
     p.out.append('<rect x="%s" y="%s" width="%s" height="%s" rx="10" fill="%s" '
                  'stroke="%s" stroke-width="5"/>'
                  % (n(x0 + 14), n(y), n(inner - 28), n(ah), pal["vermilion"],
                     ink))
     p.out.append(scallop(x0 + 22, x1 - 22, y + 8, 9, True, pal["turmeric"]))
-    ay = y + 50
+    ay = y + 54
     for ln in ABOUT:
         p.out.append(p.small(ln, cx, ay, cream, 3.0, 4.6, anchor="middle"))
-        ay += 34
+        ay += 40
     y += ah + 44
 
     # ---------------- the labels -------------------------------------------
@@ -572,7 +573,7 @@ def render(stats, dark=True):
     accents = [pal["vermilion"], pal["peacock"], pal["green"]]
     for i, (org, role, lines) in enumerate(ROAD):
         # height follows the copy: fixed cards clipped the longest entry
-        rh = 100 + len(lines) * 30 + 16
+        rh = 108 + len(lines) * 34 + 16
         p.out.append('<rect x="%s" y="%s" width="%s" height="%s" rx="8" '
                      'fill="%s" stroke="%s" stroke-width="4"/>'
                      % (n(x0 + 14), n(y), n(inner - 28), n(rh),
@@ -584,12 +585,12 @@ def render(stats, dark=True):
         tx = x0 + 140
         p.out.append(p.small(org, tx, y + 24, cream if pal["night"] else ink,
                              3.2, 4.8))
-        p.out.append(p.small(role, tx, y + 62, accents[i], 2.6, 3.9))
-        ly = y + 100
+        p.out.append(p.small(role, tx, y + 66, accents[i], 2.6, 3.9))
+        ly = y + 108
         for ln in lines:
             p.out.append(p.small(ln, tx, ly, cream if pal["night"] else ink,
                                  2.7, 4.1))
-            ly += 30
+            ly += 34
         y += rh + 16
 
     # ---------------- toolkit plates ---------------------------------------
