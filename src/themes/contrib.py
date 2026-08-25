@@ -43,9 +43,8 @@ def n(v):
 
 
 ABOUT = [
-    "i build agent systems, then",
-    "i build the thing that",
-    "grades them.",
+    "i build rag and agent systems",
+    "(sometimes websites)",
 ]
 
 PROJECTS = [
