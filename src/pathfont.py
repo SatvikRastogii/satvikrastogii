@@ -92,6 +92,40 @@ def width(s, tracking=22):
     return sum(advance(c, tracking) for c in s)
 
 
+def _xs(d):
+    """Every x coordinate in a skeleton path. The faces use only absolute
+    M/L/Q, so x values are the even entries of each command's number list."""
+    import re
+    out = []
+    for _cmd, body in re.findall(r"([MLQ])([^MLQZz]*)", d):
+        nums = [float(v) for v in re.findall(r"-?\d+(?:\.\d+)?", body)]
+        out += nums[0::2]
+    return out
+
+
+def ink_span(s, tracking=22):
+    """Left and right edge of the actual marks, not of the advance box.
+
+    width() counts the tracking that follows the final letter and knows
+    nothing about side bearings, so centring on it puts a word visibly off to
+    one side -- 18 units for STAR OK PLEASE. Centre on this instead. Stroke
+    weight is ignored on purpose: it grows both edges equally and cancels.
+    """
+    xs, x = [], 0
+    for ch in s:
+        adv, d = G.get(ch, G["?"])
+        if d:
+            xs += [x + v for v in _xs(d)]
+        x += adv + tracking
+    return (min(xs), max(xs)) if xs else (0.0, 0.0)
+
+
+def centre_x(s, tracking, scale, cx):
+    """Where to place a word so its ink is centred on cx."""
+    lo, hi = ink_span(s, tracking)
+    return cx - (lo + hi) / 2.0 * scale
+
+
 def group(s, gid, tracking=22, jitter=True):
     """A <g> of translated skeleton paths, for <use> to stroke repeatedly.
 

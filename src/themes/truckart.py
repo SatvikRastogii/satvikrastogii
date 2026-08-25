@@ -427,8 +427,6 @@ def _label(p, y, spec):
     o.append(pf.painted(gid, tx, y + 38, bs, c1, ink, c2,
                         highlight=pal["cream"]))
     hy = y + 38 + pf.CAP * bs + 16
-    o.append('<path d="M%s %s L%s %s" stroke="%s" stroke-width="3"/>'
-             % (n(tx), n(hy), n(x1 - 36), n(hy), ink))
     o.append(p.small(spec["strip"], tx, hy + 12, ink, 2.6, 3.9))
     ty = hy + 54
     for ln in spec["body"]:
@@ -488,7 +486,8 @@ def render(stats, dark=True):
     rs = min(0.42, 568.0 / gw)
     rw = gw * rs
     p.out.append(ribbon(cx - rw / 2 - 28, ry, rw + 56, 64, pal))
-    p.out.append(pf.painted(gid, cx - rw / 2, ry + 9, rs, pal["turmeric"], ink,
+    p.out.append(pf.painted(gid, pf.centre_x("STAR OK PLEASE", 38, rs, cx),
+                            ry + 9, rs, pal["turmeric"], ink,
                             pal["ink"], out_w=36, weight=26, shadow_dx=5,
                             shadow_dy=6))
 
@@ -505,15 +504,16 @@ def render(stats, dark=True):
         gid, gw = p.word(word, 20)
         s = min(0.80, 430.0 / gw)
         w = gw * s
+        bx = pf.centre_x(word, 20, s, cx)
         # The one deliberate misprint. The colour plate sits three units off
         # the black plate, the way every label in the reference does.
-        p.out.append(pf.painted(gid, cx - w / 2, ny + dy, s, colour, ink,
+        p.out.append(pf.painted(gid, bx, ny + dy, s, colour, ink,
                                 pal["vermilion"], highlight=cream))
         p.out.append('<use href="#%s" transform="translate(%s %s) scale(%s)" '
                      'fill="none" stroke="%s" stroke-width="%s" opacity="0.3" '
                      'style="mix-blend-mode:multiply" stroke-linecap="round" '
                      'stroke-linejoin="round"/>'
-                     % (gid, n(cx - w / 2 - 2.5), n(ny + dy - 3), n(s),
+                     % (gid, n(bx - 2.5), n(ny + dy - 3), n(s),
                         pal["pink"], n(36 / s)))
 
     sy = ny + 336
@@ -558,7 +558,8 @@ def render(stats, dark=True):
     # ---------------- the labels -------------------------------------------
     gid, gw = p.word("THE LABELS", 18)
     s = 0.32
-    p.out.append(pf.painted(gid, cx - gw * s / 2, y, s, pal["turmeric"], ink,
+    p.out.append(pf.painted(gid, pf.centre_x("THE LABELS", 18, s, cx),
+                            y, s, pal["turmeric"], ink,
                             pal["vermilion"], highlight=cream))
     y += pf.CAP * s + 28
     for spec in LABELS:
@@ -570,7 +571,8 @@ def render(stats, dark=True):
     y += 18
     gid, gw = p.word("THE ROAD SO FAR", 18)
     s = 0.28
-    p.out.append(pf.painted(gid, cx - gw * s / 2, y, s, pal["marigold"], ink,
+    p.out.append(pf.painted(gid, pf.centre_x("THE ROAD SO FAR", 18, s, cx),
+                            y, s, pal["marigold"], ink,
                             pal["vermilion"], highlight=cream))
     y += pf.CAP * s + 26
     accents = [pal["vermilion"], pal["peacock"], pal["green"]]
@@ -600,7 +602,8 @@ def render(stats, dark=True):
     y += 26
     gid, gw = p.word("TOOLKIT", 18)
     s = 0.28
-    p.out.append(pf.painted(gid, cx - gw * s / 2, y, s, pal["turmeric"], ink,
+    p.out.append(pf.painted(gid, pf.centre_x("TOOLKIT", 18, s, cx),
+                            y, s, pal["turmeric"], ink,
                             pal["vermilion"], highlight=cream))
     y += pf.CAP * s + 24
     plate_cols = [pal["green"], pal["vermilion"], pal["peacock"],
