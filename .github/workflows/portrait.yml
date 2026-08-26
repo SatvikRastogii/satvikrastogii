@@ -30,10 +30,18 @@ jobs:
           GH_PAT: ${{ secrets.GH_PAT }}
         run: python src/fetch_stats.py --login satvikrastogii
 
-      - name: New shimmer seed, rebuild variant 3
+      - name: New shimmer seed, rebuild every variant
         # The ambient twinkle is seeded from the date, so the portrait is
-        # never quite the same two days running.
-        run: python src/build.py --reseed contrib
+        # never quite the same two days running. All six SVGs are rebuilt,
+        # not just variant 3: the fetch above refreshed the counts the other
+        # two print as well.
+        run: python src/build.py --reseed
+
+      - name: Rewrite README.md with fresh cache-busters
+        # Required, not cosmetic. The ?v= in the README is a hash of the SVG
+        # bytes, so rebuilding an SVG without this leaves the README pointing
+        # Camo at a version that no longer exists -- and verify.py fails.
+        run: python src/build.py --readme
 
       - run: python src/verify.py --offline
 
@@ -41,7 +49,7 @@ jobs:
         run: |
           git config user.name  'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add data/stats.json assets/contrib
+          git add data/stats.json assets README.md
           if git diff --cached --quiet; then
             echo 'nothing changed; not committing'
             exit 0
