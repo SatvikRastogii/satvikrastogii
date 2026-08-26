@@ -478,18 +478,25 @@ def render(stats, dark=True):
                         n((px1 - px0) * 0.60), n(panel_h * 0.56)))
 
     ry = panel_top + 34
-    # Narrow letters -- L, E, I, T -- have side bearings smaller than the
-    # outline's half-width, so at the panel weight the black welds shut and
-    # PLEASE reads as one blob. Lighter stroke and wider tracking, checked
-    # against four alternatives before picking these numbers.
-    gid, gw = p.word("STAR OK PLEASE", 38)
+    # painted() takes its stroke widths in final units, so a fixed weight gets
+    # relatively heavier the more a word is scaled down. This is the smallest
+    # display type on the panel -- a 48px cap against SATVIK's 99px -- and at
+    # the old fixed 36/26 the outline came out 105 units wide inside a 140-unit
+    # glyph box. Every counter filled in and the neighbouring outlines welded
+    # together, so the ribbon read as one yellow bar. Scale the weights off the
+    # cap height instead: 36%/24% keeps the O, P, R and A counters open and
+    # leaves a black line between letters at the size this actually renders.
+    RT = 46                     # tracking; the extra air is what separates E,
+                                # L and I, whose side bearings are narrowest
+    gid, gw = p.word("STAR OK PLEASE", RT)
     rs = min(0.42, 568.0 / gw)
     rw = gw * rs
+    cap = pf.CAP * rs
     p.out.append(ribbon(cx - rw / 2 - 28, ry, rw + 56, 64, pal))
-    p.out.append(pf.painted(gid, pf.centre_x("STAR OK PLEASE", 38, rs, cx),
+    p.out.append(pf.painted(gid, pf.centre_x("STAR OK PLEASE", RT, rs, cx),
                             ry + 9, rs, pal["turmeric"], ink,
-                            pal["ink"], out_w=36, weight=26, shadow_dx=5,
-                            shadow_dy=6))
+                            pal["ink"], out_w=cap * 0.36, weight=cap * 0.24,
+                            shadow_dx=5, shadow_dy=6))
 
     ny = ry + 104
     fan_x, fan_y = px0 + 80, ny + 300
