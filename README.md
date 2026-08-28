@@ -2,9 +2,9 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/truckart/truckart-dark.svg?v=ae8ccda0">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/truckart/truckart-light.svg?v=ae8ccda0">
-  <img alt="Satvik Rastogi's profile painted as an Indian truck rear panel: a HORN OK PLEASE style ribbon reading STAR OK PLEASE, his name in hand-painted display lettering, an ALL INDIA WORK PERMIT badge reading OPEN TO WORK, and matchbox-label cards for LexGraph, QueryForge and his wireless sensor network research, followed by experience, stack and contact details." src="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/truckart/truckart-light.svg?v=ae8ccda0" width="830">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/truckart/truckart-dark.svg?v=cb6a910b">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/truckart/truckart-light.svg?v=cb6a910b">
+  <img alt="Satvik Rastogi's profile painted as an Indian truck rear panel: a HORN OK PLEASE style ribbon reading STAR OK PLEASE, his name in hand-painted display lettering, an ALL INDIA WORK PERMIT badge reading OPEN TO WORK, and matchbox-label cards for LexGraph, QueryForge and his wireless sensor network research, followed by experience, stack and contact details." src="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/truckart/truckart-light.svg?v=cb6a910b" width="830">
 </picture>
 
 </div>
@@ -28,9 +28,9 @@ This profile changes personality every Monday. The other two are always here.
 <summary><b>Terminal</b> — A shell session, in GitHub's own black and green</summary>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-dark.svg?v=ae8ccda0">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-light.svg?v=ae8ccda0">
-  <img alt="Satvik Rastogi's profile as a terminal session: a boot sequence, a neofetch-style block with live GitHub statistics, then commands whose output is each section -- about, LexGraph, QueryForge, wireless sensor network research, internships, stack and contact details." src="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-light.svg?v=ae8ccda0" width="830">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-dark.svg?v=cb6a910b">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-light.svg?v=cb6a910b">
+  <img alt="Satvik Rastogi's profile as a terminal session: a boot sequence, a neofetch-style block with live GitHub statistics, then commands whose output is each section -- about, LexGraph, QueryForge, wireless sensor network research, internships, stack and contact details." src="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-light.svg?v=cb6a910b" width="830">
 </picture>
 
 </details>
@@ -39,9 +39,9 @@ This profile changes personality every Monday. The other two are always here.
 <summary><b>Contribution squares</b> — A portrait and every word of type built from contribution squares</summary>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-dark.svg?v=ae8ccda0">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-light.svg?v=ae8ccda0">
-  <img alt="Satvik Rastogi's profile drawn entirely in GitHub contribution squares: a portrait of a curly-haired man in glasses, live commit, streak, repository and star counts set in a square bitmap font, then about, LexGraph, QueryForge, research, work, stack and contact sections in the same squares." src="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-light.svg?v=ae8ccda0" width="830">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-dark.svg?v=cb6a910b">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-light.svg?v=cb6a910b">
+  <img alt="Satvik Rastogi's profile drawn entirely in GitHub contribution squares: a portrait of a curly-haired man in glasses, live commit, streak, repository and star counts set in a square bitmap font, then about, LexGraph, QueryForge, research, work, stack and contact sections in the same squares." src="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-light.svg?v=cb6a910b" width="830">
 </picture>
 
 </details>
@@ -52,5 +52,5 @@ This profile changes personality every Monday. The other two are always here.
 <sub>
 
 <a href="https://github.com/SatvikRastogii/satvikrastogii/actions">a scheduled
-workflow</a>. Active theme: Truck art. Last regenerated 2026-08-27.
+workflow</a>. Active theme: Truck art. Last regenerated 2026-08-28.
 </sub>
