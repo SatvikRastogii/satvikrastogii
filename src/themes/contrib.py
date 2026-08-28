@@ -94,13 +94,13 @@ WORK = [
 
 STACK = [
     "python  java  sql  c++",
-    "langchain  langgraph",
-    "crewai  rag  graphrag",
-    "mcp  ragas  langfuse",
-    "fastapi  docker  vllm",
-    "sglang  ollama  pytorch",
-    "postgres  chromadb",
-    "lancedb  networkx  numpy",
+    "langchain  langgraph  mcp",
+    "rag  graphrag  ragas",
+    "guardrails  litellm",
+    "fastapi  docker  ollama",
+    "langfuse  langsmith  git",
+    "pytorch  tensorflow",
+    "postgres  chromadb  numpy",
 ]
 
 CONTACT = [

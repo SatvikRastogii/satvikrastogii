@@ -336,13 +336,14 @@ ROAD = [
 
 PLATES = [
     ("LANGUAGES", "PYTHON  JAVA  SQL  C++"),
-    ("AGENTS", "LANGCHAIN  LANGGRAPH  CREWAI"),
+    ("AGENTS", "LANGCHAIN  LANGGRAPH  MCP"),
     ("RETRIEVAL", "RAG  GRAPHRAG  RAGAS  CHROMADB"),
-    ("SERVING", "FASTAPI  DOCKER  VLLM  SGLANG"),
-    ("RUNTIMES", "OLLAMA  MCP  PYTORCH"),
+    ("GUARDS", "GUARDRAILS  LITELLM"),
+    ("MODELS", "PYTORCH  TENSORFLOW  SKLEARN"),
+    ("RUNTIMES", "HUGGING FACE  OLLAMA"),
+    ("SERVING", "FASTAPI  DOCKER  GIT"),
     ("TRACING", "LANGFUSE  LANGSMITH"),
-    ("DATA", "POSTGRES  LANCEDB  NETWORKX"),
-    ("NUMERICS", "NUMPY  PANDAS  HUGGING FACE"),
+    ("DATA", "POSTGRES  NETWORKX  PANDAS"),
 ]
 
 CONTACT = [
@@ -626,7 +627,7 @@ def render(stats, dark=True):
                      % (n(x0 + 14), n(y), n(inner - 28), n(ph), cream, ink))
         p.out.append('<path d="M%s %s h186 v%s h-179 a7 7 0 0 1 -7 -7 z" '
                      'fill="%s"/>'
-                     % (n(x0 + 21), n(y + 2), n(ph - 4), plate_cols[i]))
+                     % (n(x0 + 21), n(y + 2), n(ph - 4), plate_cols[i % len(plate_cols)]))
         p.out.append(p.small(k, x0 + 32, y + 18, cream, 2.8, 4.2))
         p.out.append(p.small(v, x0 + 224, y + 18, ink, 2.8, 4.2))
         y += ph + 10

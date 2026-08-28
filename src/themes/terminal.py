@@ -159,13 +159,16 @@ ROLES = [
 
 STACK = [
     ("languages", ["python  java  sql  c++"]),
-    ("agents", ["langchain  langgraph  crewai",
-                "rag  graphrag  mcp  ragas"]),
-    ("serving", ["fastapi  docker  vllm  sglang",
-                 "ollama  langfuse  langsmith"]),
-    ("data", ["postgres  chromadb  lancedb",
-              "networkx  numpy  pandas"]),
-    ("models", ["pytorch  hugging face"]),
+    ("agents", ["langchain  langgraph  mcp",
+                "rag  graphrag  ragas",
+                "guardrails  litellm"]),
+    ("serving", ["fastapi  docker  ollama",
+                 "langfuse  langsmith  git"]),
+    ("data", ["postgres  chromadb  networkx",
+              "numpy  pandas  matplotlib",
+              "seaborn  beautifulsoup"]),
+    ("models", ["pytorch  tensorflow",
+                "scikit-learn  hugging face"]),
 ]
 
 CONTACT = [
