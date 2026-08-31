@@ -2,9 +2,9 @@
 <div align="center">
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-dark.svg?v=58449015">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-light.svg?v=58449015">
-  <img alt="Satvik Rastogi's profile as a terminal session: a boot sequence, a neofetch-style block with live GitHub statistics, then commands whose output is each section -- about, LexGraph, QueryForge, wireless sensor network research, internships, stack and contact details." src="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-light.svg?v=58449015" width="830">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-dark.svg?v=58449015">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-light.svg?v=58449015">
+  <img alt="Satvik Rastogi's profile drawn entirely in GitHub contribution squares: a portrait of a curly-haired man in glasses, live commit, streak, repository and star counts set in a square bitmap font, then about, LexGraph, QueryForge, research, work, stack and contact sections in the same squares." src="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-light.svg?v=58449015" width="830">
 </picture>
 
 </div>
@@ -36,12 +36,12 @@ This profile changes personality every Monday. The other two are always here.
 </details>
 
 <details>
-<summary><b>Contribution squares</b> — A portrait and every word of type built from contribution squares</summary>
+<summary><b>Terminal</b> — A shell session, in GitHub's own black and green</summary>
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-dark.svg?v=58449015">
-  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-light.svg?v=58449015">
-  <img alt="Satvik Rastogi's profile drawn entirely in GitHub contribution squares: a portrait of a curly-haired man in glasses, live commit, streak, repository and star counts set in a square bitmap font, then about, LexGraph, QueryForge, research, work, stack and contact sections in the same squares." src="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/contrib/contrib-light.svg?v=58449015" width="830">
+  <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-dark.svg?v=58449015">
+  <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-light.svg?v=58449015">
+  <img alt="Satvik Rastogi's profile as a terminal session: a boot sequence, a neofetch-style block with live GitHub statistics, then commands whose output is each section -- about, LexGraph, QueryForge, wireless sensor network research, internships, stack and contact details." src="https://raw.githubusercontent.com/SatvikRastogii/satvikrastogii/main/assets/terminal/terminal-light.svg?v=58449015" width="830">
 </picture>
 
 </details>
@@ -52,5 +52,5 @@ This profile changes personality every Monday. The other two are always here.
 <sub>
 
 <a href="https://github.com/SatvikRastogii/satvikrastogii/actions">a scheduled
-workflow</a>. Active theme: Terminal. Last regenerated 2026-08-31.
+workflow</a>. Active theme: Contribution squares. Last regenerated 2026-08-31.
 </sub>
