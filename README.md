@@ -14,7 +14,6 @@
 [**Portfolio**](https://satvikrastogi.vercel.app) &nbsp;·&nbsp;
 [**Resume**](https://satvikrastogi.vercel.app/satvik-rastogi-resume.pdf) &nbsp;·&nbsp;
 [LinkedIn](https://www.linkedin.com/in/satvikrastogii) &nbsp;·&nbsp;
-[LeetCode](https://leetcode.com/u/blackmancodes) &nbsp;·&nbsp;
 [satvikrastogi777@gmail.com](mailto:satvikrastogi777@gmail.com)
 
 </div>
