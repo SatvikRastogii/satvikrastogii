@@ -175,7 +175,6 @@ CONTACT = [
     ("portfolio", "satvikrastogi.vercel.app"),
     ("github", "github.com/satvikrastogii"),
     ("linkedin", "linkedin.com/in/satvikrastogii"),
-    ("leetcode", "leetcode.com/u/blackmancodes"),
     ("email", "satvikrastogi777@gmail.com"),
 ]
 

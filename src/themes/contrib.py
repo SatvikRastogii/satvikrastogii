@@ -107,7 +107,6 @@ CONTACT = [
     "satvikrastogi.vercel.app",
     "github.com/satvikrastogii",
     "linkedin: satvikrastogii",
-    "leetcode: blackmancodes",
     "satvikrastogi777@gmail.com",
 ]
 
